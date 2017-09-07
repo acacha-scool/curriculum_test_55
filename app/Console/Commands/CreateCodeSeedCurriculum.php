@@ -69,34 +69,23 @@ class CreateCodeSeedCurriculum extends Command
 //            $this->line('first_or_create_course("' . $course->shortname . '", "' . $course->name . '", "active",' . $course->number . ', [ obtainStudyIdByCode("' . $course->study->shortname . '") ] );');
 //        });
 
-//        dd(ClassroomGroup::all()->first()->course->study->shortname);
-        $classrooms = ClassroomGroup::orderBy('classroom_group_course_id')->get();
-        $classrooms->each(function ($classroom) {
-            $this->line('first_or_create_classroom("' . $classroom->code . '","' . $classroom->shortName . '","' . $classroom->name . '", obtainLocationIdByName("20.2"), obtainShiftIdByCode("M"));');
-        });
-        dd('stop');
+//        $classrooms = ClassroomGroup::orderBy('classroom_group_course_id')->get();
+//        $classrooms->each(function ($classroom) {
+////            dd($classroom);
+//            $this->line('first_or_create_classroom("' . $classroom->code . '","' . $classroom->shortName . '","' . $classroom->name . '", obtainLocationIdByName("20.2"), obtainShiftIdByCode("M"));');
+//        });
 
-
+        // SUBMODULES GROUPED BY MODULES
         $modules = StudyModule::orderBy('study_module_study_shortname')->orderBy('study_module_shortname')->get();
-//        dd('JORL');
-//        dd( StudySubModule::all()->first());
         $modules->each(function ($module) {
-//            dump($module->type->name);
-            $this->line('first_or_create_module("' . $module->study_shortname . '","' . $module->shortname . '","' . $module->name . '","' . $module->type->name . '"));');
-
-//            "study_submodules_id" => 890
-//    "study_submodules_shortname" => "UF1"
-//    "study_submodules_name" => "Organització de l'espai comercial i gestió de l'àrea expositiva"
-//    "study_submodules_study_module_id" => 559
-//    "study_submodules_courseid" => 67
-//    "study_submodules_order" => 1
-//    "study_submodules_description" => ""
-
+            $moduleCode = $module->study_shortname .'_'. $module->shortname;
+                $this->line('first_or_create_module("' . $moduleCode . '","' . $module->shortname . '","' . $module->name . '","","active",' . $module->order . ',"' . $module->type->name . '");');
+            //SUBMODULES
             $submodules = StudySubModule::where('study_submodules_study_module_id',$module->id)->orderBy('study_submodules_order');
-            $submodules->each(function ($submodule) {
-                $this->line(' first_or_create_submodule("' . $submodule->shortname . '","' . $submodule->shortname . '","' . $submodule->name . '","' . $submodule->type->name . '");');
+            $submodules->each(function ($submodule) use ($module, $moduleCode) {
+//                dd($submodule->course->classrooms->first()->code);
+                $this->line(' first_or_create_submodule("' . $module->study_shortname . '_'. $module->shortname .'_' . $submodule->shortname . '","' . $submodule->shortname . '","' . $submodule->name . '","","active",' . $submodule->order .',"' . $submodule->type->name . '",obtainModuleIdByCode("'. $moduleCode . '"), [ obtainClassroomIdByCode("'. $submodule->course->classrooms->first()->code . '") ]);');
             });
-
         });
 
     }

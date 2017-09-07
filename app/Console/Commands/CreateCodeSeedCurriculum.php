@@ -58,28 +58,23 @@ class CreateCodeSeedCurriculum extends Command
 //            $this->line('first_or_create_study("' . $study->shortname . '","' . $study->name . '",obtainLawIdByCode("' . $law . '"));');
 //        });
 
-        // Departments:
-        $departments = Department::all();
-        $departments->each(function ($department) {
-            $this->line('first_or_create_department("' . $department->shortname . '","' . $department->name . '");');
+//        // Departments:
+//        $departments = Department::all();
+//        $departments->each(function ($department) {
+//            $this->line('first_or_create_department("' . $department->shortname . '","' . $department->name . '");');
+//        });
+
+//        $courses = Course::orderBy('course_study_id')->orderBy('course_number')->get();
+//        $courses->each(function ($course) {
+//            $this->line('first_or_create_course("' . $course->shortname . '", "' . $course->name . '", "active",' . $course->number . ', [ obtainStudyIdByCode("' . $course->study->shortname . '") ] );');
+//        });
+
+//        dd(ClassroomGroup::all()->first()->course->study->shortname);
+        $classrooms = ClassroomGroup::orderBy('classroom_group_course_id')->get();
+        $classrooms->each(function ($classroom) {
+            $this->line('first_or_create_classroom("' . $classroom->code . '","' . $classroom->shortName . '","' . $classroom->name . '", obtainLocationIdByName("20.2"), obtainShiftIdByCode("M"));');
         });
         dd('stop');
-
-//        $courses = Course::all();
-//        dd(Course::all()->first());
-//        $courses = Course::orderBy('course_study_id')->get();
-//        $courses->each(function ($course) {
-//            $this->line('first_or_create_course("' . $course->shortname . '","' . $course->name . '",obtainStudyIdByCode("' . $course->study->shortname . '"))');
-//        });
-//        dd('stop');
-
-        $classrooms = ClassroomGroup::all();
-//        dd(ClassroomGroup::all()->first()->course->study->shortname);
-//        $classrooms = ClassroomGroup::orderBy('classroom_group_course_id')->get();
-//        $classrooms->each(function ($classroom) {
-//            $this->line('first_or_create_classroom("' . $classroom->code . '","' . $classroom->name . '")');
-//        });
-//        dd('stop');
 
 
         $modules = StudyModule::orderBy('study_module_study_shortname')->orderBy('study_module_shortname')->get();
@@ -87,7 +82,7 @@ class CreateCodeSeedCurriculum extends Command
 //        dd( StudySubModule::all()->first());
         $modules->each(function ($module) {
 //            dump($module->type->name);
-            $this->line('first_or_create_module("' . $module->study_shortname . '","' . $module->shortname . '","' . $module->name . '","' . $module->type->name . '")');
+            $this->line('first_or_create_module("' . $module->study_shortname . '","' . $module->shortname . '","' . $module->name . '","' . $module->type->name . '"));');
 
 //            "study_submodules_id" => 890
 //    "study_submodules_shortname" => "UF1"
@@ -99,7 +94,7 @@ class CreateCodeSeedCurriculum extends Command
 
             $submodules = StudySubModule::where('study_submodules_study_module_id',$module->id)->orderBy('study_submodules_order');
             $submodules->each(function ($submodule) {
-                $this->line(' first_or_create_submodule("' . $submodule->shortname . '","' . $submodule->shortname . '","' . $submodule->name . '","' . $submodule->type->name . '")');
+                $this->line(' first_or_create_submodule("' . $submodule->shortname . '","' . $submodule->shortname . '","' . $submodule->name . '","' . $submodule->type->name . '");');
             });
 
         });

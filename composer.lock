@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a93ebf5fdcb2c82e790aee54b2fd5dc",
+    "content-hash": "cdf0ce16c09ab1d67cf95ebcd8d5722b",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
@@ -238,32 +238,6 @@
                 "wiki": "https://github.com/acacha/l5-repository",
                 "source": "https://github.com/acacha/l5-repository"
             }
-        },
-        {
-            "name": "acacha/names",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../../../acacha/names",
-                "reference": "4012b58dea1e4f093c1e1a9d9d3dac41c5f2c80b",
-                "shasum": null
-            },
-            "require": {
-                "laravel/framework": "^5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Acacha\\Names\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Sergi Tur Badenas",
-                    "email": "sergiturbadenas@gmail.com"
-                }
-            ],
-            "description": "Provides alternative names to Laravel models."
         },
         {
             "name": "acacha/stateful-eloquent",
@@ -2166,12 +2140,11 @@
             "dist": {
                 "type": "path",
                 "url": "../curriculum",
-                "reference": "cde937ed5ff6dec5028ff22ea393c6ac12a970fc",
+                "reference": "8d9f4b6ae8964a30f739291623598dd9175af934",
                 "shasum": null
             },
             "require": {
                 "acacha/l5-repository": "dev-master",
-                "acacha/names": "dev-master",
                 "acacha/stateful-eloquent": "dev-master",
                 "fzaninotto/faker": "^1.6",
                 "laravel/framework": "^5.3",
@@ -2299,11 +2272,10 @@
             "dist": {
                 "type": "path",
                 "url": "../../../acacha-scool/foundation/foundation",
-                "reference": "241f8705004d52cd68b69f7718502dbb01414cad",
+                "reference": "c1dff7afc091e9d6ea5f8213b0d0b5ea3ace9f94",
                 "shasum": null
             },
             "require": {
-                "acacha/names": "dev-master",
                 "laravel/framework": "^5.3",
                 "php": "~5.6|~7.0"
             },
@@ -2354,6 +2326,83 @@
             "keywords": [
                 "Scool",
                 "foundation"
+            ]
+        },
+        {
+            "name": "scool/timetables",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../../acacha-scool/timetables/timetables",
+                "reference": "823e99a942983242770f272994a0f9bb5a76d628",
+                "shasum": null
+            },
+            "require": {
+                "acacha/l5-repository": "dev-master",
+                "acacha/stateful-eloquent": "dev-master",
+                "laravel/framework": "^5.3",
+                "php": "~5.6|~7.0",
+                "scool/curriculum": "dev-master",
+                "scool/foundation": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0||~5.0",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Scool\\Timetables\\Providers\\TimetablesServiceProvider"
+                    ],
+                    "aliases": {
+                        "ScoolStaff": "Scool\\Timetables\\Timetables"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Scool\\Timetables\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Scool\\Timetables\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "check-style": [
+                    "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+                ],
+                "fix-style": [
+                    "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergi Tur Badenas",
+                    "email": "sergiturbadenas@gmail.com",
+                    "homepage": "https://github.com/acacha",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Timetables module for scool",
+            "homepage": "https://github.com/scool/timetables",
+            "keywords": [
+                "scool",
+                "timetables"
             ]
         },
         {
@@ -4994,11 +5043,11 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "scool/curriculum": 20,
-        "acacha/names": 20,
         "acacha/l5-repository": 20,
         "scool/foundation": 20,
         "acacha/stateful-eloquent": 20,
-        "scool/ebre_escool_model": 20
+        "scool/ebre_escool_model": 20,
+        "scool/timetables": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

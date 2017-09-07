@@ -2,8 +2,8 @@
     "version": 2,
     "paths": [
         "../../../acacha-scool/foundation/foundation",
+        "../../../acacha-scool/timetables/timetables",
         "../../../acacha/l5-repository",
-        "../../../acacha/names",
         "../../../acacha/stateful-eloquent",
         "../../../scool/ebre_escool_model",
         "../curriculum"

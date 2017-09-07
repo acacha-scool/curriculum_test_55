@@ -2140,7 +2140,7 @@
             "dist": {
                 "type": "path",
                 "url": "../curriculum",
-                "reference": "8d9f4b6ae8964a30f739291623598dd9175af934",
+                "reference": "d6b8222451561b1f045193e9bf367cbf4bc81e45",
                 "shasum": null
             },
             "require": {
@@ -2272,11 +2272,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../../acacha-scool/foundation/foundation",
-                "reference": "c1dff7afc091e9d6ea5f8213b0d0b5ea3ace9f94",
+                "reference": "4e32712e8bfff4f1aa76586bf45f4c3216ab0aa3",
                 "shasum": null
             },
             "require": {
-                "laravel/framework": "^5.3",
+                "laravel/framework": "^5.5",
                 "php": "~5.6|~7.0"
             },
             "require-dev": {
@@ -2287,9 +2287,17 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Scool\\Foundation\\Providers\\FoundationServiceProvider"
+                    ]
                 }
             },
             "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
                 "psr-4": {
                     "Scool\\Foundation\\": "src"
                 }

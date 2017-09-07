@@ -51,28 +51,19 @@ class CreateCodeSeedCurriculum extends Command
         // First execute :
 //        /usr/bin/ssh -o StrictHostKeyChecking=no  -N -i /home/sergi/.ssh/id_rsa -L 14852:127.0.0.1:3306 -p 22 sergi@192.168.50.180
 
-        $studies = Study::all();
-        $studies = Study::orderBy('studies_shortname')->get();
-        $studies->each(function ($study) {
-            $law = "LOE"; if ($study->studies_law_id == 2) $law = "LOGSE";
-            $this->line('first_or_create_study("' . $study->shortname . '","' . $study->name . '",obtainLawIdByCode("' . $law . '"));');
+        // Studies:
+//        $studies = Study::orderBy('studies_shortname')->get();
+//        $studies->each(function ($study) {
+//            $law = "LOE"; if ($study->studies_law_id == 2) $law = "LOGSE";
+//            $this->line('first_or_create_study("' . $study->shortname . '","' . $study->name . '",obtainLawIdByCode("' . $law . '"));');
+//        });
+
+        // Departments:
+        $departments = Department::all();
+        $departments->each(function ($department) {
+            $this->line('first_or_create_department("' . $department->shortname . '","' . $department->name . '");');
         });
         dd('stop');
-
-//        "department_shortname" => "Administració"
-//    "department_name" => "Departament d'administració i gestió"
-//    "department_head" => 23
-//    "department_parent_department_id" => 1
-//    "department_organizational_unit_id" => 4
-//    "department_location_id" => 118
-
-
-//        $departments = Department::all();
-////        dd(Department::all()->first());
-//        $departments->each(function ($department) {
-//            $this->line('first_or_create_classroom("' . $department->shortname . '","' . $department->name . '")');
-//        });
-//        dd('stop');
 
 //        $courses = Course::all();
 //        dd(Course::all()->first());

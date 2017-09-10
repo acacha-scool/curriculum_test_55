@@ -79,16 +79,36 @@ class CreateCodeSeedCurriculum extends Command
         $modules = StudyModule::orderBy('study_module_study_shortname')->orderBy('study_module_shortname')->get();
         $modules->each(function ($module) {
             $moduleCode = $module->study_shortname .'_'. $module->shortname;
-                $this->line('first_or_create_module("' . $moduleCode . '","' . $module->shortname . '","' . $module->name . '","","active",' . $module->order . ',"' . $module->type->name . '");');
+            $moduleOrder= $module->order;
+            if (! $moduleOrder) {
+                $moduleOrder = 1;
+            }
+
+            $this->line('first_or_create_module("' . $moduleCode . '","' . $module->shortname . '","' . $module->name . '","","active",' . $moduleOrder . ',"' . $module->type->name . '");');
+
             //SUBMODULES
             $submodules = StudySubModule::where('study_submodules_study_module_id',$module->id)->orderBy('study_submodules_order');
             $submodules->each(function ($submodule) use ($module, $moduleCode) {
-//                dd($submodule->course->classrooms->first()->code);
-                $this->line(' first_or_create_submodule("' . $module->study_shortname . '_'. $module->shortname .'_' . $submodule->shortname . '","' . $submodule->shortname . '","' . $submodule->name . '","","active",' . $submodule->order .',"' . $submodule->type->name . '",obtainModuleIdByCode("'. $moduleCode . '"), [ obtainClassroomIdByCode("'. $submodule->course->classrooms->first()->code . '") ]);');
+                $submoduleCode = $module->study_shortname . '_'. $module->shortname .'_' . $submodule->shortname;
+
+                $classrooms = "[";
+                $numClassrooms = $submodule->course->classrooms->count();
+                $i = 1;
+                foreach ($submodule->course->classrooms as $classroom) {
+
+                    $classrooms = $classrooms . 'obtainClassroomIdByCode("' . $classroom->code . '")';
+                    if ( $i !== $numClassrooms)   $classrooms = $classrooms . ", ";
+                    $i++;
+                }
+                $classrooms = $classrooms . "]";
+
+                $this->line(' first_or_create_submodule("' . $submoduleCode . '","' . $submodule->shortname . '","' . $submodule->name . '","","active",' . $submodule->order .',"' . $submodule->type->name . '",obtainModuleIdByCode("'. $moduleCode . '"), ' . $classrooms . ');');
             });
         });
 
     }
+
+
 
     /**
      * Study already exists

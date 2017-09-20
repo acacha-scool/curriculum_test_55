@@ -1,0 +1,6 @@
+first_or_create_module("ACO_MP01","MP01","Dinamització del punt de venda","","active",1,"Normal");
+ first_or_create_submodule("ACO_MP01_UF1","UF1","Organització de l'espai comercial i gestió de l'àrea expositiva","","active",1,"Normal",obtainModuleIdByCode("ACO_MP01"), [obtainClassroomIdByCode("1ACO"), obtainClassroomIdByCode("1ACO A"), obtainClassroomIdByCode("1ACO B")]);
+ first_or_create_submodule("ACO_MP01_UF2","UF2","Aparadorisme: Muntatge i manteniment","","active",2,"Normal",obtainModuleIdByCode("ACO_MP01"), [obtainClassroomIdByCode("1ACO"), obtainClassroomIdByCode("1ACO A"), obtainClassroomIdByCode("1ACO B")]);
+ first_or_create_submodule("ACO_MP01_UF3","UF3","Accions promocionals en el punt de venda","","active",3,"Normal",obtainModuleIdByCode("ACO_MP01"), [obtainClassroomIdByCode("1ACO"), obtainClassroomIdByCode("1ACO A"), obtainClassroomIdByCode("1ACO B")]);
+first_or_create_module("ACO_MP02","MP02","Gestió de compres","","active",2,"Normal");
+ first_or_create_submodule("ACO_MP02_UF1","UF1","Aprovisionament","","active",1,"Normal",obtainModuleIdByCode("ACO_MP02"), [obtainClassroomIdByCode("2ACO")]);

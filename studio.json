@@ -3,6 +3,7 @@
     "paths": [
         "../../../acacha-scool/foundation/foundation",
         "../../../acacha-scool/timetables/timetables",
+        "../../../acacha-scool/untis/untis",
         "../../../acacha/l5-repository",
         "../../../acacha/stateful-eloquent",
         "../../../scool/ebre_escool_model",

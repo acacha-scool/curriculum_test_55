@@ -108,13 +108,4 @@ class CreateCodeSeedCurriculum extends Command
 
     }
 
-
-
-    /**
-     * Study already exists
-     */
-    protected function study_already_exists( $shortname)
-    {
-
-    }
 }

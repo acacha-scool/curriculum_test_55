@@ -17,7 +17,8 @@
         "scool/foundation": "dev-master",
         "acacha/stateful-eloquent": "dev-master",
         "scool/ebre_escool_model": "dev-master",
-        "scool/timetables": "dev-master"
+        "scool/timetables": "dev-master",
+        "scool/untis": "dev-master"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
